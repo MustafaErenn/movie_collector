@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/searchMovies/searchmovies.dart';
 import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/product/service/delay_service.dart';
 import 'package:staj_projesi_movie_collector/product/service/searchmovie_service.dart';
 import 'model/searchmovies_model.dart';
 
@@ -14,6 +15,9 @@ abstract class SearchMovieViewModel extends State<SearchMovies> {
   List<Result> resultSearchMovies = [];
   ScrollController searchScrollController;
   int resultPage;
+
+  final Debouncer onSearchDebouncer =
+      new Debouncer(delay: new Duration(milliseconds: 2000));
   @override
   void initState() {
     // TODO: implement initState
@@ -29,35 +33,40 @@ abstract class SearchMovieViewModel extends State<SearchMovies> {
         } else {
           setState(() {
             resultPage++;
-            getMovies(resultPage, controller.text);
+            getMovies(resultPage, controller.text.trim());
           });
         }
       }
     });
 
     controller.addListener(() {
-      setState(() {
-        resultSearchMovies = [];
-        searchMovies = [];
-        getMovies(resultPage, controller.text);
-      });
-
-      if (controller.text == '') {
-        debugPrint('TEMIZLENDI');
+      this.onSearchDebouncer.debounce(() {
         setState(() {
+          debugPrint('İstek atılıyor');
           resultSearchMovies = [];
-          getMovies(resultPage, controller.text);
+          searchMovies = [];
+          resultPage = 1;
+          getMovies(resultPage, controller.text.trim());
         });
-      }
+
+        if (controller.text.isEmpty) {
+          debugPrint('TEMIZLENDI');
+          setState(() {
+            resultSearchMovies = [];
+            resultPage = 1;
+            getMovies(resultPage, controller.text.trim());
+          });
+        }
+      });
     });
   }
 
   Future<void> getMovies(int page, String name) async {
-    debugPrint('GET MOVİES CALİSTİ');
+    debugPrint('GET MOVİES CALİSTİ: page: ' + page.toString());
     searchMovies =
         await context.read<SearchMovieService>().getMovies(page, name);
     if (listEquals(_oldResult, searchMovies) == false) {
-      searchMovies.sort((b, a) => a.voteAverage.compareTo(b.voteAverage));
+      //searchMovies.sort((b, a) => a.voteAverage.compareTo(b.voteAverage));
       resultSearchMovies += searchMovies;
     } else {
       resultSearchMovies = resultSearchMovies;
