@@ -57,6 +57,7 @@ abstract class SearchMovieViewModel extends State<SearchMovies> {
     searchMovies =
         await context.read<SearchMovieService>().getMovies(page, name);
     if (listEquals(_oldResult, searchMovies) == false) {
+      searchMovies.sort((b, a) => a.voteAverage.compareTo(b.voteAverage));
       resultSearchMovies += searchMovies;
     } else {
       resultSearchMovies = resultSearchMovies;
