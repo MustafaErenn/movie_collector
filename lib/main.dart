@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
               );
             } else if (snapshot.hasData) {
               if (FirebaseAuth.instance.currentUser == null) {
-                print('HİÇ KULLANICI GİRİŞİ YAPILMAMIŞ');
+                print('HİÇ KULLANICI GİRİŞİ YAPILMAMIŞ!');
                 return LoginPage();
               } else {
                 print('KULLANICI GİRİŞ YAPMIŞ DAHA ONCEDEN');
