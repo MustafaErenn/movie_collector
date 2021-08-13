@@ -77,6 +77,7 @@ abstract class SurpriseMeViewModel extends State<SurpriseMe> {
       });
     } else {
       setState(() {
+        debugPrint('hic favori yok ');
         fsBool = false;
       });
     }

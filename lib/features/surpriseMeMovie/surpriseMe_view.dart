@@ -30,7 +30,7 @@ class SurpriseMeView extends SurpriseMeViewModel {
                   child: Center(
                     child: Text(
                       'You must have at least added one movie to your favourites. \n' +
-                          'This feature makes a random suggestion based on your favorite movies.',
+                          'aThis feature makes a random suggestion based on your favorite movies.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.w200,
