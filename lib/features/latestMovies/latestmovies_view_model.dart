@@ -37,7 +37,7 @@ abstract class LatestMovieViewModel extends State<LatestMovies> {
   Future<void> getMovies(int page) async {
     latestMovies = await context.read<LatestService>().getMovies(page);
     if (listEquals(_oldResult, latestMovies) == false) {
-      latestMovies.sort((b, a) => a.releaseDate.compareTo(b.releaseDate));
+      // latestMovies.sort((b, a) => a.releaseDate.compareTo(b.releaseDate));
       resultLatestMovies += latestMovies;
     } else {
       resultLatestMovies = resultLatestMovies;

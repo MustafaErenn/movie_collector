@@ -6,7 +6,7 @@ class SimilarMovieService {
 
   Future<List<Result>> getMovies(int page, int id) async {
     String url =
-        'https://api.themoviedb.org/3/movie/$id/similar?api_key=3af7f4422f5644de486084c74816093a&language=en-US&page=$page';
+        'https://api.themoviedb.org/3/movie/$id/recommendations?api_key=3af7f4422f5644de486084c74816093a&language=en-US&page=$page';
     final response = await dio.get(url);
 
     if (response.statusCode == 200) {

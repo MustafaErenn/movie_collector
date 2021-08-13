@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:staj_projesi_movie_collector/features/favoritesMovies/favoritesmovies.dart';
 import 'package:staj_projesi_movie_collector/features/loginPage/loginpage.dart';
 import 'package:staj_projesi_movie_collector/features/profileSettings/changeProfileDetails.dart';
+import 'package:staj_projesi_movie_collector/features/surpriseMeMovie/surpriseMe.dart';
 import 'package:staj_projesi_movie_collector/features/watchedMovies/watchedmovies.dart';
 import 'package:staj_projesi_movie_collector/features/watchlistMovies/watchlistmovies.dart';
 import 'package:staj_projesi_movie_collector/product/service/auth.dart';
@@ -168,7 +169,14 @@ class _MainDrawerState extends State<MainDrawer> {
                 height: 10,
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SurpriseMe(),
+                    ),
+                  );
+                },
                 leading: Icon(
                   Icons.wb_incandescent_outlined,
                 ),

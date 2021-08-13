@@ -40,7 +40,7 @@ abstract class PopularMovieViewModel extends State<PopularMovies> {
   Future<void> getMovies(int page) async {
     popularMovies = await context.read<PopularService>().getMovies(page);
     if (listEquals(_oldResult, popularMovies) == false) {
-      popularMovies.sort((b, a) => a.popularity.compareTo(b.popularity));
+      //popularMovies.sort((b, a) => a.popularity.compareTo(b.popularity));
       resultPopularMovies += popularMovies;
     } else {
       resultPopularMovies = resultPopularMovies;

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/features/genreMovies/genremovies.dart';
 import 'package:staj_projesi_movie_collector/product/model/firestore_movie_model.dart';
 
+import '../web_view_moviedb.dart';
 import 'surpriseMe_view_model.dart';
 
 class SurpriseMeView extends SurpriseMeViewModel {
@@ -38,7 +40,7 @@ class SurpriseMeView extends SurpriseMeViewModel {
                       );
                       await firestoreService.flipWatchlist(movie);
                       watchlistIconBool = await firestoreService
-                          .watchlistIcon(widget.id.toString());
+                          .watchlistIcon(this.id.toString());
                       setState(() {});
                     }),
                 IconButton(
@@ -54,7 +56,7 @@ class SurpriseMeView extends SurpriseMeViewModel {
                       );
                       await firestoreService.flipFavorites(movie);
                       favoritesIconBool = await firestoreService
-                          .favoritesIcon(widget.id.toString());
+                          .favoritesIcon(this.id.toString());
                       setState(() {});
                     }),
                 IconButton(
@@ -70,23 +72,23 @@ class SurpriseMeView extends SurpriseMeViewModel {
                       );
                       await firestoreService.flipWatched(movie);
                       watchedIconBool = await firestoreService
-                          .watchedIcon(widget.id.toString());
+                          .watchedIcon(this.id.toString());
                       setState(() {});
                     }),
-                IconButton(
-                  icon: Icon(Icons.read_more),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SimilarMovies(
-                          id: movieDetail.id,
-                          movieName: movieDetail.title,
-                        ),
-                      ),
-                    );
-                  },
-                )
+                // IconButton(
+                //   icon: Icon(Icons.read_more),
+                //   onPressed: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => SimilarMovies(
+                //           id: movieDetail.id,
+                //           movieName: movieDetail.title,
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // )
               ],
             ),
             body: Container(
