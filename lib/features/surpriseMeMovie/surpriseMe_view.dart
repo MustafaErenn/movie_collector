@@ -16,21 +16,52 @@ class SurpriseMeView extends SurpriseMeViewModel {
   @override
   Widget build(BuildContext context) {
     return movieDetail == null
-        ? Center(
-            child: CircularProgressIndicator(),
-          )
+        ? this.fsBool == false && this.fsBool != null
+            ? Scaffold(
+                appBar: AppBar(
+                  title: Text(
+                    'Recommended',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  centerTitle: false,
+                ),
+                body: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Text(
+                      'You must have at least added one movie to your favourites. \n' +
+                          'This feature makes a random suggestion based on your favorite movies.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w200,
+                        fontSize: 30,
+                        color: Colors.lightBlueAccent,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              )
         : Scaffold(
             appBar: AppBar(
               title: Text(
-                'Movie Detail',
-                style: TextStyle(fontSize: 20),
+                'Recommended',
+                style: TextStyle(fontSize: 18),
               ),
               centerTitle: false,
               actions: [
                 IconButton(
                     icon: watchlistIconBool == false
-                        ? Icon(Icons.remove_from_queue)
-                        : Icon(Icons.add_to_queue),
+                        ? Icon(
+                            Icons.remove_from_queue,
+                            size: 20,
+                          )
+                        : Icon(
+                            Icons.add_to_queue,
+                            size: 20,
+                          ),
                     onPressed: () async {
                       Movie movie = Movie(
                         movieId: movieDetail.id.toString(),
@@ -45,8 +76,14 @@ class SurpriseMeView extends SurpriseMeViewModel {
                     }),
                 IconButton(
                     icon: favoritesIconBool == false
-                        ? Icon(Icons.remove_circle_outline)
-                        : Icon(Icons.favorite),
+                        ? Icon(
+                            Icons.remove_circle_outline,
+                            size: 20,
+                          )
+                        : Icon(
+                            Icons.favorite,
+                            size: 20,
+                          ),
                     onPressed: () async {
                       Movie movie = Movie(
                         movieId: movieDetail.id.toString(),
@@ -61,8 +98,14 @@ class SurpriseMeView extends SurpriseMeViewModel {
                     }),
                 IconButton(
                     icon: watchedIconBool == false
-                        ? Icon(Icons.remove_done)
-                        : Icon(Icons.done_all),
+                        ? Icon(
+                            Icons.remove_done,
+                            size: 20,
+                          )
+                        : Icon(
+                            Icons.done_all,
+                            size: 20,
+                          ),
                     onPressed: () async {
                       Movie movie = Movie(
                         movieId: movieDetail.id.toString(),
@@ -75,20 +118,6 @@ class SurpriseMeView extends SurpriseMeViewModel {
                           .watchedIcon(this.id.toString());
                       setState(() {});
                     }),
-                // IconButton(
-                //   icon: Icon(Icons.read_more),
-                //   onPressed: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) => SimilarMovies(
-                //           id: movieDetail.id,
-                //           movieName: movieDetail.title,
-                //         ),
-                //       ),
-                //     );
-                //   },
-                // )
               ],
             ),
             body: Container(
@@ -101,7 +130,7 @@ class SurpriseMeView extends SurpriseMeViewModel {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               '${movieDetail.title}' +
-                                  ' (${movieDetail.releaseDate.year})',
+                                  ' (${movieDetail.releaseDate.year}) - Recommended because you added "$firebaseMovieTitle" to your favourites.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   decoration: TextDecoration.none,
