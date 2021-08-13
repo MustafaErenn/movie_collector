@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:staj_projesi_movie_collector/features/genreMovies/genremovies.dart';
-import 'package:staj_projesi_movie_collector/features/similarMovies/similarmovies.dart';
 import 'package:staj_projesi_movie_collector/product/model/firestore_movie_model.dart';
-import 'package:staj_projesi_movie_collector/product/service/firestore_service.dart';
 
-import '../web_view_moviedb.dart';
-import 'moviedetails_view_model.dart';
+import 'surpriseMe_view_model.dart';
 
-class MovieDetailsView extends MovieDetailsViewModel {
+class SurpriseMeView extends SurpriseMeViewModel {
   @override
   void initState() {
     // TODO: implement initState
