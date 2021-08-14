@@ -17,11 +17,6 @@ class MovieCollectorTabView extends StatelessWidget {
               PopularMovies(),
               LatestMovies(),
               SearchMovies(),
-
-              // TopRatedMovies(),
-              // PopularMovies(),
-              // LatestMovies(),
-              // SearchMovies(),
             ],
           ),
         ));
@@ -32,21 +27,42 @@ class MovieCollectorTabView extends StatelessWidget {
       color: Colors.black54,
       child: TabBar(
         tabs: [
-          Tab(
-            icon: Icon(Icons.star_rate),
-            text: 'Top Rated',
+          Container(
+            height: 50.0,
+            child: Tab(
+              icon: Icon(Icons.star_rate),
+              child: Text(
+                'Top Rated',
+                style: TextStyle(fontSize: 10),
+              ),
+            ),
           ),
-          Tab(
-            icon: Icon(Icons.auto_awesome),
-            text: 'Popular',
+          Container(
+            height: 50.0,
+            child: Tab(
+              icon: Icon(Icons.auto_awesome),
+              child: Text(
+                'Popular',
+                style: TextStyle(fontSize: 10),
+              ),
+            ),
           ),
-          Tab(
-            icon: Icon(Icons.fiber_new_rounded),
-            text: 'Latest',
+          Container(
+            height: 50.0,
+            child: Tab(
+              icon: Icon(Icons.fiber_new_rounded),
+              child: Text(
+                'Latest',
+                style: TextStyle(fontSize: 10),
+              ),
+            ),
           ),
-          Tab(
-            icon: Icon(Icons.search),
-            text: 'Search',
+          Container(
+            height: 60.0,
+            child: Tab(
+              icon: Icon(Icons.search),
+              text: 'Search',
+            ),
           ),
         ],
       ),

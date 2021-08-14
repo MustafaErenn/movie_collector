@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:staj_projesi_movie_collector/features/genreMovies/genremovies.dart';
 import 'package:staj_projesi_movie_collector/product/model/firestore_movie_model.dart';
-
 import '../web_view_moviedb.dart';
 import 'surpriseMe_view_model.dart';
 

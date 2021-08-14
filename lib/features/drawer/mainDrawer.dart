@@ -8,6 +8,7 @@ import 'package:staj_projesi_movie_collector/features/profileSettings/changeProf
 import 'package:staj_projesi_movie_collector/features/surpriseMeMovie/surpriseMe.dart';
 import 'package:staj_projesi_movie_collector/features/watchedMovies/watchedmovies.dart';
 import 'package:staj_projesi_movie_collector/features/watchlistMovies/watchlistmovies.dart';
+import 'package:staj_projesi_movie_collector/product/model/theme_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -206,6 +207,21 @@ class _MainDrawerState extends State<MainDrawer> {
                 title: Text(
                   "Log Out",
                   style: TextStyle(fontSize: 20),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              ListTile(
+                trailing: Switch(
+                  value: context.watch<CurrentTheme>().lightThemeEnabled,
+                  onChanged: (bool value) {
+                    context.read<CurrentTheme>().toggleTheme();
+                  },
+                ),
+                title: Text(
+                  "Light Theme",
+                  style: TextStyle(fontSize: 15),
                 ),
               ),
             ]),

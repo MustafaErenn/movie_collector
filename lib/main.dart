@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:staj_projesi_movie_collector/features/loginPage/loginpage.dart';
 import 'package:staj_projesi_movie_collector/product/service/searchmovie_service.dart';
 import 'features/tabs/movieCollector_tab_view.dart';
+import 'product/model/theme_toggle.dart';
 import 'product/service/currentgenremovie_service.dart';
 import 'product/service/firestore_service.dart';
 import 'product/service/latest_service.dart';
@@ -24,6 +25,7 @@ void main() {
       Provider<CurrentGenreService>(create: (context) => CurrentGenreService()),
       Provider<MovieDetailService>(create: (context) => MovieDetailService()),
       Provider<SimilarMovieService>(create: (context) => SimilarMovieService()),
+      ChangeNotifierProvider<CurrentTheme>(create: (context) => CurrentTheme()),
       ChangeNotifierProvider<FirestoreService>(
           create: (context) => FirestoreService()),
     ],
@@ -39,11 +41,32 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
+  SharedPreferences prefs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    callPrefs();
+  }
+
+  void callPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+
+    debugPrint('current Theme : ' + prefs.getBool('lightTheme').toString());
+    context.read<CurrentTheme>().lightThemeEnabled =
+        (prefs.getBool('lightTheme') == null
+            ? false
+            : prefs.getBool('lightTheme'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Movie Collector',
-        theme: ThemeData.dark(),
+        theme: context.watch<CurrentTheme>().lightThemeEnabled == true
+            ? ThemeData.light()
+            : ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         home: FutureBuilder(
           future: _initialization,
