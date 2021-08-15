@@ -1,13 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'package:provider/provider.dart';
 import 'package:staj_projesi_movie_collector/features/favoritesMovies/favoritesmovies.dart';
 import 'package:staj_projesi_movie_collector/features/loginPage/loginpage.dart';
 import 'package:staj_projesi_movie_collector/features/profileSettings/changeProfileDetails.dart';
 import 'package:staj_projesi_movie_collector/features/surpriseMeMovie/surpriseMe.dart';
+import 'package:staj_projesi_movie_collector/features/tabs/movieCollector_tab_view.dart';
 import 'package:staj_projesi_movie_collector/features/watchedMovies/watchedmovies.dart';
 import 'package:staj_projesi_movie_collector/features/watchlistMovies/watchlistmovies.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/model/theme_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,7 +43,6 @@ class _MainDrawerState extends State<MainDrawer> {
   Widget build(BuildContext context) {
     AuthService _authService = AuthService();
 
-    print(this.ppUrl);
     return username == null
         ? Center(
             child: CircularProgressIndicator(),
@@ -83,7 +82,9 @@ class _MainDrawerState extends State<MainDrawer> {
                         height: 18.0,
                       ),
                       Text(
-                        "Username: ${this.username}",
+                        context.watch<CurrentLanguage>().turkishLang == true
+                            ? "Kullanıcı Adı: ${this.username}"
+                            : "Username: ${this.username}",
                         style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.w500,
@@ -122,7 +123,9 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_to_queue,
                 ),
                 title: Text(
-                  "Watchlist",
+                  context.watch<CurrentLanguage>().turkishLang == true
+                      ? "İzleme Listesi"
+                      : "Watchlist",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -142,7 +145,9 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.favorite_outline_outlined,
                 ),
                 title: Text(
-                  "Favorites",
+                  context.watch<CurrentLanguage>().turkishLang == true
+                      ? "Favoriler"
+                      : "Favorites",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -162,7 +167,9 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.done_all,
                 ),
                 title: Text(
-                  "Watched",
+                  context.watch<CurrentLanguage>().turkishLang == true
+                      ? "İzlediklerin"
+                      : "Watched",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -182,7 +189,9 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.wb_incandescent_outlined,
                 ),
                 title: Text(
-                  "Surprise Me!",
+                  context.watch<CurrentLanguage>().turkishLang == true
+                      ? "Beni Şaşırt!"
+                      : "Surprise Me!",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -205,7 +214,9 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.logout,
                 ),
                 title: Text(
-                  "Log Out",
+                  context.watch<CurrentLanguage>().turkishLang == true
+                      ? "Çıkış Yap"
+                      : "Log Out",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -220,7 +231,30 @@ class _MainDrawerState extends State<MainDrawer> {
                   },
                 ),
                 title: Text(
-                  "Light Theme",
+                  context.watch<CurrentLanguage>().turkishLang == true
+                      ? "Açık Tema"
+                      : "Light Theme",
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              ListTile(
+                trailing: Switch(
+                  value: context.watch<CurrentLanguage>().turkishLang,
+                  onChanged: (bool value) {
+                    context.read<CurrentLanguage>().toggleLang();
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MovieCollectorTabView()),
+                    );
+                  },
+                ),
+                title: Text(
+                  "Türkçe",
                   style: TextStyle(fontSize: 15),
                 ),
               ),

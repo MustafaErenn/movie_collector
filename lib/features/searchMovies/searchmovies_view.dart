@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/drawer/mainDrawer.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/moviedetails.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'searchmovies_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SearchMovieView extends SearchMovieViewModel {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Movie'),
+        title: Text(context.watch<CurrentLanguage>().turkishLang == true
+            ? 'Film Ara'
+            : 'Search Movie'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -24,7 +28,12 @@ class SearchMovieView extends SearchMovieViewModel {
                             controller: controller,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: "Enter a movie name",
+                              labelText: context
+                                          .watch<CurrentLanguage>()
+                                          .turkishLang ==
+                                      true
+                                  ? "Film ismi giriniz"
+                                  : "Enter a movie name",
                               icon: Icon(Icons.drive_file_rename_outline),
                             ),
                             maxLines: 1,

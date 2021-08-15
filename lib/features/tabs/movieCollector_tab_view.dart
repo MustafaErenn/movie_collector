@@ -3,6 +3,8 @@ import 'package:staj_projesi_movie_collector/features/latestMovies/latestmovies.
 import 'package:staj_projesi_movie_collector/features/popularMovies/popularmovies.dart';
 import 'package:staj_projesi_movie_collector/features/searchMovies/searchmovies.dart';
 import 'package:staj_projesi_movie_collector/features/topRatedMovies/topratedmovies.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
+import 'package:provider/provider.dart';
 
 class MovieCollectorTabView extends StatelessWidget {
   @override
@@ -10,7 +12,7 @@ class MovieCollectorTabView extends StatelessWidget {
     return DefaultTabController(
         length: 4,
         child: Scaffold(
-          bottomNavigationBar: buildBottomAppBar(),
+          bottomNavigationBar: buildBottomAppBar(context),
           body: TabBarView(
             children: [
               TopRatedMovies(),
@@ -22,7 +24,7 @@ class MovieCollectorTabView extends StatelessWidget {
         ));
   }
 
-  BottomAppBar buildBottomAppBar() {
+  BottomAppBar buildBottomAppBar(BuildContext context) {
     return BottomAppBar(
       color: Colors.black54,
       child: TabBar(
@@ -32,7 +34,9 @@ class MovieCollectorTabView extends StatelessWidget {
             child: Tab(
               icon: Icon(Icons.star_rate),
               child: Text(
-                'Top Rated',
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? 'En iyiler'
+                    : 'Top Rated',
                 style: TextStyle(fontSize: 10),
               ),
             ),
@@ -42,7 +46,9 @@ class MovieCollectorTabView extends StatelessWidget {
             child: Tab(
               icon: Icon(Icons.auto_awesome),
               child: Text(
-                'Popular',
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? "Popüler"
+                    : 'Popular',
                 style: TextStyle(fontSize: 10),
               ),
             ),
@@ -52,7 +58,9 @@ class MovieCollectorTabView extends StatelessWidget {
             child: Tab(
               icon: Icon(Icons.fiber_new_rounded),
               child: Text(
-                'Latest',
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? 'En yeniler'
+                    : 'Latest',
                 style: TextStyle(fontSize: 10),
               ),
             ),
@@ -61,7 +69,12 @@ class MovieCollectorTabView extends StatelessWidget {
             height: 60.0,
             child: Tab(
               icon: Icon(Icons.search),
-              text: 'Search',
+              child: Text(
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? 'Arama'
+                    : 'Search',
+                style: TextStyle(fontSize: 10),
+              ),
             ),
           ),
         ],

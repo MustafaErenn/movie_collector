@@ -7,6 +7,7 @@ import 'package:quiver/iterables.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/model/moviedetails_model.dart';
 import 'package:staj_projesi_movie_collector/features/similarMovies/model/similarmovies_model.dart';
 import 'package:staj_projesi_movie_collector/features/surpriseMeMovie/surpriseMe.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/firestore_service.dart';
 import 'package:staj_projesi_movie_collector/product/service/moviedetail_service.dart';
 import 'package:staj_projesi_movie_collector/product/service/similarmovies_service.dart';
@@ -52,10 +53,12 @@ abstract class SurpriseMeViewModel extends State<SurpriseMe> {
       int randomNumber = rng.nextInt(favoritesMovieIdList.length);
       int randomId = int.parse(zipped[randomNumber][0]);
 
-      _similarMovies =
-          await context.read<SimilarMovieService>().getMovies(1, randomId);
-      _similarMovies +=
-          await context.read<SimilarMovieService>().getMovies(2, randomId);
+      _similarMovies = await context
+          .read<SimilarMovieService>()
+          .getMovies(1, randomId, context.read<CurrentLanguage>().turkishLang);
+      _similarMovies += await context
+          .read<SimilarMovieService>()
+          .getMovies(2, randomId, context.read<CurrentLanguage>().turkishLang);
       debugPrint(
           'favorilerden secilen rastgele film id: ' + randomId.toString());
 
@@ -84,7 +87,9 @@ abstract class SurpriseMeViewModel extends State<SurpriseMe> {
   }
 
   Future<void> getMovies() async {
-    movieDetail = await context.read<MovieDetailService>().getMovie(this.id);
+    movieDetail = await context
+        .read<MovieDetailService>()
+        .getMovie(this.id, context.read<CurrentLanguage>().turkishLang);
 
     watchlistIconBool =
         await firestoreService.watchlistIcon(this.id.toString());

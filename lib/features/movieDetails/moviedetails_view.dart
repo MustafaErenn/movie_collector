@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:staj_projesi_movie_collector/features/genreMovies/genremovies.dart';
 import 'package:staj_projesi_movie_collector/features/similarMovies/similarmovies.dart';
 import 'package:staj_projesi_movie_collector/product/model/firestore_movie_model.dart';
-import 'package:staj_projesi_movie_collector/product/service/firestore_service.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 
 import '../web_view_moviedb.dart';
 import 'moviedetails_view_model.dart';
@@ -25,7 +24,9 @@ class MovieDetailsView extends MovieDetailsViewModel {
         : Scaffold(
             appBar: AppBar(
               title: Text(
-                'Movie Detail',
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? 'Film Detayı'
+                    : 'Movie Detail',
                 style: TextStyle(fontSize: 20),
               ),
               centerTitle: false,
@@ -148,7 +149,12 @@ class MovieDetailsView extends MovieDetailsViewModel {
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          'ℹ️  ${movieDetail.runtime.toString()} min',
+                                          context
+                                                      .watch<CurrentLanguage>()
+                                                      .turkishLang ==
+                                                  true
+                                              ? 'ℹ️  ${movieDetail.runtime.toString()} dk'
+                                              : 'ℹ️  ${movieDetail.runtime.toString()} min',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 20,
@@ -248,7 +254,12 @@ class MovieDetailsView extends MovieDetailsViewModel {
                                         ),
                                       );
                                     },
-                                    child: const Text('Visit TheMovieDb'),
+                                    child: Text(context
+                                                .watch<CurrentLanguage>()
+                                                .turkishLang ==
+                                            true
+                                        ? "TheMovieDb'yi ziyaret et"
+                                        : 'Visit TheMovieDb'),
                                   ),
                                 ),
                               ),

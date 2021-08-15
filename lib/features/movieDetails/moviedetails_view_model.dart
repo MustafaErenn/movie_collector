@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/firestore_service.dart';
 import 'package:staj_projesi_movie_collector/product/service/moviedetail_service.dart';
 
@@ -24,7 +25,9 @@ abstract class MovieDetailsViewModel extends State<MovieDetails> {
   }
 
   Future<void> getMovies() async {
-    movieDetail = await context.read<MovieDetailService>().getMovie(widget.id);
+    movieDetail = await context
+        .read<MovieDetailService>()
+        .getMovie(widget.id, context.read<CurrentLanguage>().turkishLang);
 
     watchlistIconBool =
         await firestoreService.watchlistIcon(widget.id.toString());

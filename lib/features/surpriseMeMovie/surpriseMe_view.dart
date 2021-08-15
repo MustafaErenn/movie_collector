@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/genreMovies/genremovies.dart';
 import 'package:staj_projesi_movie_collector/product/model/firestore_movie_model.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import '../web_view_moviedb.dart';
 import 'surpriseMe_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SurpriseMeView extends SurpriseMeViewModel {
   @override
@@ -18,7 +20,9 @@ class SurpriseMeView extends SurpriseMeViewModel {
             ? Scaffold(
                 appBar: AppBar(
                   title: Text(
-                    'Recommended',
+                    context.watch<CurrentLanguage>().turkishLang == true
+                        ? 'Önerilen'
+                        : 'Recommended',
                     style: TextStyle(fontSize: 18),
                   ),
                   centerTitle: false,
@@ -27,8 +31,11 @@ class SurpriseMeView extends SurpriseMeViewModel {
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: Text(
-                      'You must have at least added one movie to your favourites. \n' +
-                          'This feature makes a random suggestion based on your favorite movies.',
+                      context.watch<CurrentLanguage>().turkishLang == true
+                          ? 'Favorilerinize en az bir film eklemiş olmalısınız\n' +
+                              'Bu özellik favorilerinize eklediğiniz filmlere göre rastgele bir öneride bulunur.'
+                          : 'You must have at least added one movie to your favourites. \n' +
+                              'This feature makes a random suggestion based on your favorite movies.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.w200,
@@ -45,7 +52,9 @@ class SurpriseMeView extends SurpriseMeViewModel {
         : Scaffold(
             appBar: AppBar(
               title: Text(
-                'Recommended',
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? 'Önerilen'
+                    : 'Recommended',
                 style: TextStyle(fontSize: 18),
               ),
               centerTitle: false,
@@ -172,7 +181,12 @@ class SurpriseMeView extends SurpriseMeViewModel {
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          'ℹ️  ${movieDetail.runtime.toString()} min',
+                                          context
+                                                      .watch<CurrentLanguage>()
+                                                      .turkishLang ==
+                                                  true
+                                              ? 'ℹ️  ${movieDetail.runtime.toString()} dk'
+                                              : 'ℹ️  ${movieDetail.runtime.toString()} min',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 20,
@@ -272,7 +286,12 @@ class SurpriseMeView extends SurpriseMeViewModel {
                                         ),
                                       );
                                     },
-                                    child: const Text('Visit TheMovieDb'),
+                                    child: Text(context
+                                                .watch<CurrentLanguage>()
+                                                .turkishLang ==
+                                            true
+                                        ? "TheMovieDb'yi ziyaret et"
+                                        : 'Visit TheMovieDb'),
                                   ),
                                 ),
                               ),

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/moviedetails.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'watchedmovies_view_model.dart';
+import 'package:provider/provider.dart';
 
 class WatchedMovieView extends WatchedMovieViewModel {
   @override
@@ -10,7 +12,9 @@ class WatchedMovieView extends WatchedMovieViewModel {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Watched',
+          context.watch<CurrentLanguage>().turkishLang == true
+              ? 'İzlediklerin'
+              : 'Watched',
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(

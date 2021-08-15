@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/currentgenremovie_service.dart';
 
 import 'genremovies.dart';
@@ -35,8 +36,9 @@ abstract class GenreMovieViewModel extends State<GenreMovies> {
   }
 
   Future<void> getCurrentGenreMovies(int page, int genre) async {
-    currentGenreMovies =
-        await context.read<CurrentGenreService>().getMovies(page, genre);
+    currentGenreMovies = await context
+        .read<CurrentGenreService>()
+        .getMovies(page, genre, context.read<CurrentLanguage>().turkishLang);
     if (listEquals(_oldResult, currentGenreMovies) == false) {
       resultGenreMovies += currentGenreMovies;
     } else {

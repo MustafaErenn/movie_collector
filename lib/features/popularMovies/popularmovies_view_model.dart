@@ -2,6 +2,7 @@ import 'package:staj_projesi_movie_collector/features/popularMovies/popularmovie
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/popular_service.dart';
 import 'model/popularmovies_model.dart';
 
@@ -38,9 +39,10 @@ abstract class PopularMovieViewModel extends State<PopularMovies> {
   }
 
   Future<void> getMovies(int page) async {
-    popularMovies = await context.read<PopularService>().getMovies(page);
+    popularMovies = await context
+        .read<PopularService>()
+        .getMovies(page, context.read<CurrentLanguage>().turkishLang);
     if (listEquals(_oldResult, popularMovies) == false) {
-      //popularMovies.sort((b, a) => a.popularity.compareTo(b.popularity));
       resultPopularMovies += popularMovies;
     } else {
       resultPopularMovies = resultPopularMovies;

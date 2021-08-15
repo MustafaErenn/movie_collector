@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/searchMovies/searchmovies.dart';
 import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/delay_service.dart';
 import 'package:staj_projesi_movie_collector/product/service/searchmovie_service.dart';
 import 'model/searchmovies_model.dart';
@@ -63,8 +64,9 @@ abstract class SearchMovieViewModel extends State<SearchMovies> {
 
   Future<void> getMovies(int page, String name) async {
     debugPrint('GET MOVİES CALİSTİ: page: ' + page.toString());
-    searchMovies =
-        await context.read<SearchMovieService>().getMovies(page, name);
+    searchMovies = await context
+        .read<SearchMovieService>()
+        .getMovies(page, name, context.read<CurrentLanguage>().turkishLang);
     if (listEquals(_oldResult, searchMovies) == false) {
       //searchMovies.sort((b, a) => a.voteAverage.compareTo(b.voteAverage));
       resultSearchMovies += searchMovies;

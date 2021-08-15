@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/moviedetails.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 
 import 'similarmovies_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SimilarMovieView extends SimilarMovieViewModel {
   @override
@@ -11,7 +13,9 @@ class SimilarMovieView extends SimilarMovieViewModel {
             appBar: AppBar(
               centerTitle: true,
               title: Text(
-                'Movies like ${widget.movieName}',
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? '${widget.movieName} gibi filmler'
+                    : 'Movies like ${widget.movieName}',
               ),
             ),
             body: Padding(
@@ -37,15 +41,24 @@ class SimilarMovieView extends SimilarMovieViewModel {
                     );
                   },
                   child: Container(
-                    color: Colors.black,
+                    //color: Colors.black,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.black38),
                     child: Column(
                       children: [
                         Expanded(
                           flex: 4,
-                          child: Image(
-                            image: NetworkImage(
-                                "https://image.tmdb.org/t/p/w500" +
-                                    resultSimilarMovies[index].posterPath),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image(
+                                image: NetworkImage(
+                                    "https://image.tmdb.org/t/p/w500" +
+                                        resultSimilarMovies[index].posterPath),
+                              ),
+                            ),
                           ),
                         ),
                         Expanded(
@@ -63,9 +76,9 @@ class SimilarMovieView extends SimilarMovieViewModel {
                           flex: 1,
                           child: Center(
                             child: Text(
-                              "${resultSimilarMovies[index].voteAverage.toStringAsFixed(1)}",
+                              "⭐  ${resultSimilarMovies[index].voteAverage.toStringAsFixed(1)}",
                               style: TextStyle(
-                                  fontSize: 25.0, color: Colors.white),
+                                  fontSize: 17.5, color: Colors.white),
                             ),
                           ),
                         ),

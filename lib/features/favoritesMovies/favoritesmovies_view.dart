@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/moviedetails.dart';
+import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 
 import 'favoritesmovies_view_model.dart';
 
@@ -11,7 +13,9 @@ class FavoritesMovieView extends FavoriteMovieViewModel {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Favorites',
+          context.watch<CurrentLanguage>().turkishLang == true
+              ? 'Favoriler'
+              : 'Favorites',
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(

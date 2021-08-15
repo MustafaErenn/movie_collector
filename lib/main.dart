@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:staj_projesi_movie_collector/features/loginPage/loginpage.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/searchmovie_service.dart';
 import 'features/tabs/movieCollector_tab_view.dart';
 import 'product/model/theme_toggle.dart';
@@ -26,6 +27,8 @@ void main() {
       Provider<MovieDetailService>(create: (context) => MovieDetailService()),
       Provider<SimilarMovieService>(create: (context) => SimilarMovieService()),
       ChangeNotifierProvider<CurrentTheme>(create: (context) => CurrentTheme()),
+      ChangeNotifierProvider<CurrentLanguage>(
+          create: (context) => CurrentLanguage()),
       ChangeNotifierProvider<FirestoreService>(
           create: (context) => FirestoreService()),
     ],
@@ -54,16 +57,25 @@ class _MyAppState extends State<MyApp> {
     prefs = await SharedPreferences.getInstance();
 
     debugPrint('current Theme : ' + prefs.getBool('lightTheme').toString());
+    debugPrint('current lang : ' + prefs.getBool('turkishLanguage').toString());
+
     context.read<CurrentTheme>().lightThemeEnabled =
         (prefs.getBool('lightTheme') == null
             ? false
             : prefs.getBool('lightTheme'));
+
+    context.read<CurrentLanguage>().turkishLang =
+        (prefs.getBool('turkishLanguage') == null
+            ? false
+            : prefs.getBool('turkishLanguage'));
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Movie Collector',
+        title: context.watch<CurrentLanguage>().turkishLang == true
+            ? 'Film Koleksiyoncusu'
+            : 'Movie Collector',
         theme: context.watch<CurrentTheme>().lightThemeEnabled == true
             ? ThemeData.light()
             : ThemeData.dark(),

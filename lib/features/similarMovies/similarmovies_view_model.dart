@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/similarmovies_service.dart';
 import 'model/similarmovies_model.dart';
 import 'similarmovies.dart';
@@ -34,8 +35,9 @@ abstract class SimilarMovieViewModel extends State<SimilarMovies> {
   }
 
   Future<void> getMovies(int page, int id) async {
-    similarMovies =
-        await context.read<SimilarMovieService>().getMovies(page, id);
+    similarMovies = await context
+        .read<SimilarMovieService>()
+        .getMovies(page, id, context.read<CurrentLanguage>().turkishLang);
     if (listEquals(_oldResult, similarMovies) == false) {
       resultSimilarMovies += similarMovies;
     } else {

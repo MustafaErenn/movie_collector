@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/latestMovies/latestmovies.dart';
 import 'package:provider/provider.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:staj_projesi_movie_collector/product/service/latest_service.dart';
 import 'model/latestmovie_model.dart';
 
@@ -35,7 +36,9 @@ abstract class LatestMovieViewModel extends State<LatestMovies> {
   }
 
   Future<void> getMovies(int page) async {
-    latestMovies = await context.read<LatestService>().getMovies(page);
+    latestMovies = await context
+        .read<LatestService>()
+        .getMovies(page, context.read<CurrentLanguage>().turkishLang);
     if (listEquals(_oldResult, latestMovies) == false) {
       // latestMovies.sort((b, a) => a.releaseDate.compareTo(b.releaseDate));
       resultLatestMovies += latestMovies;

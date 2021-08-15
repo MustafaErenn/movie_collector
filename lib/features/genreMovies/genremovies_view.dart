@@ -36,15 +36,24 @@ class GenreMovieView extends GenreMovieViewModel {
                     );
                   },
                   child: Container(
-                    color: Colors.black,
+                    //color: Colors.black,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.black38),
                     child: Column(
                       children: [
                         Expanded(
                           flex: 4,
-                          child: Image(
-                            image: NetworkImage(
-                                "https://image.tmdb.org/t/p/w500" +
-                                    resultGenreMovies[index].posterPath),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image(
+                                image: NetworkImage(
+                                    "https://image.tmdb.org/t/p/w500" +
+                                        resultGenreMovies[index].posterPath),
+                              ),
+                            ),
                           ),
                         ),
                         Expanded(
@@ -62,9 +71,9 @@ class GenreMovieView extends GenreMovieViewModel {
                           flex: 1,
                           child: Center(
                             child: Text(
-                              "${resultGenreMovies[index].voteAverage}",
+                              "⭐  ${resultGenreMovies[index].voteAverage}",
                               style: TextStyle(
-                                  fontSize: 25.0, color: Colors.white),
+                                  fontSize: 17.5, color: Colors.white),
                             ),
                           ),
                         ),

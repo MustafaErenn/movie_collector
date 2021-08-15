@@ -6,9 +6,16 @@ import 'package:staj_projesi_movie_collector/features/movieDetails/model/moviede
 class MovieDetailService {
   var dio = new Dio();
 
-  Future<MovieDetailsModel> getMovie(int id) async {
-    String url =
-        'https://api.themoviedb.org/3/movie/$id?api_key=3af7f4422f5644de486084c74816093a&language=en-US';
+  Future<MovieDetailsModel> getMovie(int id, bool turkLang) async {
+    String url;
+    if (turkLang) {
+      url =
+          'https://api.themoviedb.org/3/movie/$id?api_key=3af7f4422f5644de486084c74816093a&language=tr';
+    } else {
+      url =
+          'https://api.themoviedb.org/3/movie/$id?api_key=3af7f4422f5644de486084c74816093a';
+    }
+
     final response = await dio.get(url);
 
     if (response.statusCode == 200) {

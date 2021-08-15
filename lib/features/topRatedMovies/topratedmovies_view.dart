@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/drawer/mainDrawer.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/moviedetails.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'topratedmovies_view_model.dart';
+import 'package:provider/provider.dart';
 
 class TopRatedMovieView extends TopRatedMovieViewModel {
   @override
@@ -12,7 +13,9 @@ class TopRatedMovieView extends TopRatedMovieViewModel {
             appBar: AppBar(
               centerTitle: true,
               title: Text(
-                'Top Rated Movies',
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? 'En İyi Filmler'
+                    : 'Top Rated Movies',
               ),
             ),
             body: Padding(

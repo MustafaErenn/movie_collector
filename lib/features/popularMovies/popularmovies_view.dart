@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/drawer/mainDrawer.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/moviedetails.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'popularmovies_view_model.dart';
+import 'package:provider/provider.dart';
 
 class PopularMovieView extends PopularMovieViewModel {
   Widget build(BuildContext context) {
@@ -10,7 +12,9 @@ class PopularMovieView extends PopularMovieViewModel {
             appBar: AppBar(
               centerTitle: true,
               title: Text(
-                'Popular Movies',
+                context.watch<CurrentLanguage>().turkishLang
+                    ? 'Popüler Filmler'
+                    : 'Popular Movies',
               ),
             ),
             body: Padding(

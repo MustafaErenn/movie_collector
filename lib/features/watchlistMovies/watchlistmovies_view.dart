@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:staj_projesi_movie_collector/features/movieDetails/moviedetails.dart';
+import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 
 import 'watchlistmovies_view_model.dart';
 
@@ -14,7 +13,9 @@ class WatchlistMovieView extends WatchlistMovieViewModel {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Watchlist',
+          context.watch<CurrentLanguage>().turkishLang == true
+              ? 'İzleme Listesi'
+              : 'Watchlist',
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(

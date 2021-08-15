@@ -4,9 +4,15 @@ import 'package:staj_projesi_movie_collector/features/latestMovies/model/latestm
 class LatestService {
   var dio = new Dio();
 
-  Future<List<Result>> getMovies(int page) async {
-    String url =
-        'https://api.themoviedb.org/3/movie/now_playing?api_key=3af7f4422f5644de486084c74816093a&page=$page';
+  Future<List<Result>> getMovies(int page, bool turkLang) async {
+    String url;
+    if (turkLang) {
+      url =
+          'https://api.themoviedb.org/3/movie/now_playing?api_key=3af7f4422f5644de486084c74816093a&page=$page&language=tr';
+    } else {
+      url =
+          'https://api.themoviedb.org/3/movie/now_playing?api_key=3af7f4422f5644de486084c74816093a&page=$page';
+    }
 
     final response = await dio.get(url);
 
