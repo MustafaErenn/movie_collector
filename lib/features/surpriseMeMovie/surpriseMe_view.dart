@@ -60,6 +60,9 @@ class SurpriseMeView extends SurpriseMeViewModel {
               centerTitle: false,
               actions: [
                 IconButton(
+                    tooltip: watchlistIconBool == false
+                        ? 'Remove from your watchlist'
+                        : 'Add to your watchlist',
                     icon: watchlistIconBool == false
                         ? Icon(
                             Icons.remove_from_queue,
@@ -82,6 +85,9 @@ class SurpriseMeView extends SurpriseMeViewModel {
                       setState(() {});
                     }),
                 IconButton(
+                    tooltip: favoritesIconBool == false
+                        ? 'Remove from your favorites'
+                        : 'Add to your favorites',
                     icon: favoritesIconBool == false
                         ? Icon(
                             Icons.remove_circle_outline,
@@ -104,6 +110,9 @@ class SurpriseMeView extends SurpriseMeViewModel {
                       setState(() {});
                     }),
                 IconButton(
+                    tooltip: watchedIconBool == false
+                        ? 'Remove from your watched'
+                        : 'Add to your watched',
                     icon: watchedIconBool == false
                         ? Icon(
                             Icons.remove_done,
@@ -123,6 +132,8 @@ class SurpriseMeView extends SurpriseMeViewModel {
                       await firestoreService.flipWatched(movie);
                       watchedIconBool = await firestoreService
                           .watchedIcon(this.id.toString());
+                      watchlistIconBool = await firestoreService
+                          .watchlistIcon(this.id.toString());
                       setState(() {});
                     }),
               ],

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
@@ -26,18 +27,53 @@ class FirestoreService extends ChangeNotifier {
           .collection("Watchlist")
           .doc(movie.movieId)
           .delete();
+
+      Fluttertoast.showToast(
+        msg: "Removed from your watchlist",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     } else {
-      await _firestore
+      DocumentSnapshot documentSnapshot = await _firestore
           .collection("Saves")
           .doc(_auth.currentUser.uid)
-          .collection("Watchlist")
+          .collection("Watched")
           .doc(movie.movieId)
-          .set({
-        "movieId": movie.movieId.toString(),
-        "movieTitle": movie.movieTitle.toString(),
-        "moviePosterPath": movie.moviePosterPath.toString(),
-        "movieRating": movie.movieRating.toString(),
-      });
+          .get();
+      if (documentSnapshot.exists) {
+        Fluttertoast.showToast(
+          msg: "You already watched this movie.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      } else {
+        await _firestore
+            .collection("Saves")
+            .doc(_auth.currentUser.uid)
+            .collection("Watchlist")
+            .doc(movie.movieId)
+            .set({
+          "movieId": movie.movieId.toString(),
+          "movieTitle": movie.movieTitle.toString(),
+          "moviePosterPath": movie.moviePosterPath.toString(),
+          "movieRating": movie.movieRating.toString(),
+        });
+
+        Fluttertoast.showToast(
+          msg: "Added to watchlist",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
     }
   }
 
@@ -70,6 +106,15 @@ class FirestoreService extends ChangeNotifier {
           .collection("Favorites")
           .doc(movie.movieId)
           .delete();
+
+      Fluttertoast.showToast(
+        msg: "Removed from your favorites",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     } else {
       await _firestore
           .collection("Saves")
@@ -82,6 +127,15 @@ class FirestoreService extends ChangeNotifier {
         "moviePosterPath": movie.moviePosterPath.toString(),
         "movieRating": movie.movieRating.toString(),
       });
+
+      Fluttertoast.showToast(
+        msg: "Added to favorites",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 
@@ -115,18 +169,72 @@ class FirestoreService extends ChangeNotifier {
           .collection("Watched")
           .doc(movie.movieId)
           .delete();
+
+      Fluttertoast.showToast(
+        msg: "Removed from your watched list",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     } else {
-      await _firestore
+      DocumentSnapshot documentSnapshot = await _firestore
           .collection("Saves")
           .doc(_auth.currentUser.uid)
-          .collection("Watched")
+          .collection("Watchlist")
           .doc(movie.movieId)
-          .set({
-        "movieId": movie.movieId.toString(),
-        "movieTitle": movie.movieTitle.toString(),
-        "moviePosterPath": movie.moviePosterPath.toString(),
-        "movieRating": movie.movieRating.toString(),
-      });
+          .get();
+
+      if (documentSnapshot.exists) {
+        await _firestore
+            .collection("Saves")
+            .doc(_auth.currentUser.uid)
+            .collection("Watchlist")
+            .doc(movie.movieId)
+            .delete();
+
+        await _firestore
+            .collection("Saves")
+            .doc(_auth.currentUser.uid)
+            .collection("Watched")
+            .doc(movie.movieId)
+            .set({
+          "movieId": movie.movieId.toString(),
+          "movieTitle": movie.movieTitle.toString(),
+          "moviePosterPath": movie.moviePosterPath.toString(),
+          "movieRating": movie.movieRating.toString(),
+        });
+
+        Fluttertoast.showToast(
+          msg: "Removing from watchlist because you added movie to watched.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      } else {
+        await _firestore
+            .collection("Saves")
+            .doc(_auth.currentUser.uid)
+            .collection("Watched")
+            .doc(movie.movieId)
+            .set({
+          "movieId": movie.movieId.toString(),
+          "movieTitle": movie.movieTitle.toString(),
+          "moviePosterPath": movie.moviePosterPath.toString(),
+          "movieRating": movie.movieRating.toString(),
+        });
+        Fluttertoast.showToast(
+          msg: "Added to watched list",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
     }
   }
 

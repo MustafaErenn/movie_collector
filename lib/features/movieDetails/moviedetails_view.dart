@@ -32,6 +32,9 @@ class MovieDetailsView extends MovieDetailsViewModel {
               centerTitle: false,
               actions: [
                 IconButton(
+                    tooltip: watchlistIconBool == false
+                        ? 'Remove from your watchlist'
+                        : 'Add to your watchlist',
                     icon: watchlistIconBool == false
                         ? Icon(Icons.remove_from_queue)
                         : Icon(Icons.add_to_queue),
@@ -48,6 +51,9 @@ class MovieDetailsView extends MovieDetailsViewModel {
                       setState(() {});
                     }),
                 IconButton(
+                    tooltip: favoritesIconBool == false
+                        ? 'Remove from your favorites'
+                        : 'Add to your favorites',
                     icon: favoritesIconBool == false
                         ? Icon(Icons.remove_circle_outline)
                         : Icon(Icons.favorite),
@@ -64,6 +70,9 @@ class MovieDetailsView extends MovieDetailsViewModel {
                       setState(() {});
                     }),
                 IconButton(
+                    tooltip: watchedIconBool == false
+                        ? 'Remove from your watched'
+                        : 'Add to your watched',
                     icon: watchedIconBool == false
                         ? Icon(Icons.remove_done)
                         : Icon(Icons.done_all),
@@ -77,9 +86,12 @@ class MovieDetailsView extends MovieDetailsViewModel {
                       await firestoreService.flipWatched(movie);
                       watchedIconBool = await firestoreService
                           .watchedIcon(widget.id.toString());
+                      watchlistIconBool = await firestoreService
+                          .watchlistIcon(widget.id.toString());
                       setState(() {});
                     }),
                 IconButton(
+                  tooltip: 'Get recommended movies',
                   icon: Icon(Icons.read_more),
                   onPressed: () {
                     Navigator.push(
