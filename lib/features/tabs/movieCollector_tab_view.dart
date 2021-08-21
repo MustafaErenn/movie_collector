@@ -5,8 +5,50 @@ import 'package:staj_projesi_movie_collector/features/searchMovies/searchmovies.
 import 'package:staj_projesi_movie_collector/features/topRatedMovies/topratedmovies.dart';
 import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:staj_projesi_movie_collector/product/service/local_notification_service.dart';
 
-class MovieCollectorTabView extends StatelessWidget {
+class MovieCollectorTabView extends StatefulWidget {
+  @override
+  _MovieCollectorTabViewState createState() => _MovieCollectorTabViewState();
+}
+
+class _MovieCollectorTabViewState extends State<MovieCollectorTabView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    LocalNotificationService.initialize(context);
+
+    /// uygulama kapalıyken gelen bildirim
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        if (message != null) {
+          Navigator.of(context).pushNamed(message.data["page"]);
+        }
+      },
+    );
+
+    ///Foreground-> yani uygulama içinde gezinirken gelecek bildirimleri dinler.
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        debugPrint("NOTIFY BODY: " + message.notification.body);
+        debugPrint("NOTIFY TITLE: " + message.notification.title);
+
+        LocalNotificationService.display(message);
+      },
+    );
+
+    ///Uygulama arka planda ama çalışıyorken,kullanıcı bildirime tıklarsa
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        final routeFromMessage = message.data["page"];
+        Navigator.of(context).pushNamed(routeFromMessage);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

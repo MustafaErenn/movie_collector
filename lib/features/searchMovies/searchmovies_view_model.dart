@@ -43,7 +43,6 @@ abstract class SearchMovieViewModel extends State<SearchMovies> {
     controller.addListener(() {
       this.onSearchDebouncer.debounce(() {
         setState(() {
-          debugPrint('İstek atılıyor');
           resultSearchMovies = [];
           searchMovies = [];
           resultPage = 1;
@@ -51,7 +50,6 @@ abstract class SearchMovieViewModel extends State<SearchMovies> {
         });
 
         if (controller.text.isEmpty) {
-          debugPrint('TEMIZLENDI');
           setState(() {
             resultSearchMovies = [];
             resultPage = 1;
@@ -63,12 +61,10 @@ abstract class SearchMovieViewModel extends State<SearchMovies> {
   }
 
   Future<void> getMovies(int page, String name) async {
-    debugPrint('GET MOVİES CALİSTİ: page: ' + page.toString());
     searchMovies = await context
         .read<SearchMovieService>()
         .getMovies(page, name, context.read<CurrentLanguage>().turkishLang);
     if (listEquals(_oldResult, searchMovies) == false) {
-      //searchMovies.sort((b, a) => a.voteAverage.compareTo(b.voteAverage));
       resultSearchMovies += searchMovies;
     } else {
       resultSearchMovies = resultSearchMovies;
