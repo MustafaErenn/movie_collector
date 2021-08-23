@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:staj_projesi_movie_collector/features/latestMovies/latestmovies.dart';
 import 'package:staj_projesi_movie_collector/features/popularMovies/popularmovies.dart';
+import 'package:staj_projesi_movie_collector/features/searchByGenreMovies/searchbygenre.dart';
 import 'package:staj_projesi_movie_collector/features/searchMovies/searchmovies.dart';
 import 'package:staj_projesi_movie_collector/features/topRatedMovies/topratedmovies.dart';
 import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
@@ -52,7 +53,7 @@ class _MovieCollectorTabViewState extends State<MovieCollectorTabView> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
           bottomNavigationBar: buildBottomAppBar(context),
           body: TabBarView(
@@ -61,6 +62,7 @@ class _MovieCollectorTabViewState extends State<MovieCollectorTabView> {
               PopularMovies(),
               LatestMovies(),
               SearchMovies(),
+              SearchByGenre(),
             ],
           ),
         ));
@@ -79,7 +81,7 @@ class _MovieCollectorTabViewState extends State<MovieCollectorTabView> {
                 context.watch<CurrentLanguage>().turkishLang == true
                     ? 'En iyiler'
                     : 'Top Rated',
-                style: TextStyle(fontSize: 10),
+                style: TextStyle(fontSize: 8),
               ),
             ),
           ),
@@ -115,6 +117,18 @@ class _MovieCollectorTabViewState extends State<MovieCollectorTabView> {
                 context.watch<CurrentLanguage>().turkishLang == true
                     ? 'Arama'
                     : 'Search',
+                style: TextStyle(fontSize: 10),
+              ),
+            ),
+          ),
+          Container(
+            height: 50.0,
+            child: Tab(
+              icon: Icon(Icons.wifi),
+              child: Text(
+                context.watch<CurrentLanguage>().turkishLang == true
+                    ? 'Tür'
+                    : 'Genre',
                 style: TextStyle(fontSize: 10),
               ),
             ),

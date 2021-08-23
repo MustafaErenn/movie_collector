@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:staj_projesi_movie_collector/features/loginPage/loginpage.dart';
 import 'package:staj_projesi_movie_collector/product/model/lang_toggle.dart';
+import 'package:staj_projesi_movie_collector/product/service/moregenremovie_service.dart';
+import 'package:staj_projesi_movie_collector/product/service/searchbygenre_service.dart';
 import 'package:staj_projesi_movie_collector/product/service/searchmovie_service.dart';
 import 'features/surpriseMeMovie/surpriseMe.dart';
 import 'features/tabs/movieCollector_tab_view.dart';
@@ -33,9 +35,12 @@ void main() async {
     providers: [
       Provider<LatestService>(create: (context) => LatestService()),
       Provider<SearchMovieService>(create: (context) => SearchMovieService()),
+      Provider<SearchByGenreService>(
+          create: (context) => SearchByGenreService()),
       Provider<PopularService>(create: (context) => PopularService()),
       Provider<TopRatedService>(create: (context) => TopRatedService()),
       Provider<CurrentGenreService>(create: (context) => CurrentGenreService()),
+      Provider<MoreGenreService>(create: (context) => MoreGenreService()),
       Provider<MovieDetailService>(create: (context) => MovieDetailService()),
       Provider<SimilarMovieService>(create: (context) => SimilarMovieService()),
       ChangeNotifierProvider<CurrentTheme>(create: (context) => CurrentTheme()),
