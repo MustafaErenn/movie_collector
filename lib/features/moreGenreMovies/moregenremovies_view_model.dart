@@ -46,7 +46,6 @@ abstract class MoreGenreMovieViewModel extends State<MoreGenreMovies> {
       _oldResult = currentGenreMovies;
     } else {
       resultGenreMovies = null;
-      debugPrint('ELSETEYİM');
     }
 
     setState(() {});

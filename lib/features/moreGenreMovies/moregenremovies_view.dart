@@ -6,7 +6,6 @@ import 'moregenremovies_view_model.dart';
 class MoreGenreMovieView extends MoreGenreMovieViewModel {
   @override
   Widget build(BuildContext context) {
-    debugPrint(resultGenreMovies.toString());
     return resultGenreMovies == null
         ? Scaffold(
             appBar: AppBar(
