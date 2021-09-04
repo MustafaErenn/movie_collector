@@ -70,10 +70,6 @@ class _MyAppState extends State<MyApp> {
 
   void callPrefs() async {
     prefs = await SharedPreferences.getInstance();
-
-    debugPrint('current Theme : ' + prefs.getBool('lightTheme').toString());
-    debugPrint('current lang : ' + prefs.getBool('turkishLanguage').toString());
-
     context.read<CurrentTheme>().lightThemeEnabled =
         (prefs.getBool('lightTheme') == null
             ? false

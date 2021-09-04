@@ -18,7 +18,6 @@ class SearchByGenreView extends SearchByGenreViewModel {
                   ? [
                       IconButton(
                         onPressed: () {
-                          debugPrint(selectedItems.toString());
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -54,7 +53,6 @@ class SearchByGenreView extends SearchByGenreViewModel {
                             onLongPress: () {
                               if (!selectedItems
                                   .contains(allGenres[index].id)) {
-                                debugPrint('onLongPress ifindeyim');
                                 setState(() {
                                   selectedItems.add(allGenres[index].id);
                                 });
@@ -62,7 +60,6 @@ class SearchByGenreView extends SearchByGenreViewModel {
                             },
                             onTap: () {
                               if (selectedItems.contains(allGenres[index].id)) {
-                                debugPrint('onTap ifindeyim');
                                 setState(() {
                                   selectedItems.removeWhere(
                                       (val) => val == allGenres[index].id);

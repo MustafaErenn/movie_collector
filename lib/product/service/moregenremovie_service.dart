@@ -20,7 +20,6 @@ class MoreGenreService {
     for (int i = 0; i < genreList.length; i++) {
       genreUrl = (genreList[i].toString() + virgul) + genreUrl;
     }
-    debugPrint('GENRE URL' + genreUrl);
 
     if (turkLang) {
       url =

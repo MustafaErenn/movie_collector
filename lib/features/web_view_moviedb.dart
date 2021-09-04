@@ -11,7 +11,6 @@ class WebViewMovieDb extends StatefulWidget {
 class _WebViewMovieDbState extends State<WebViewMovieDb> {
   @override
   Widget build(BuildContext context) {
-    debugPrint('https://www.themoviedb.org/movie/${widget.id}');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

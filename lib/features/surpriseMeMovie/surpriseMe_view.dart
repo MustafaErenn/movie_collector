@@ -227,12 +227,6 @@ class SurpriseMeView extends SurpriseMeViewModel {
                                       bottom: 0.0),
                                   child: GestureDetector(
                                     onTap: () {
-                                      debugPrint("turunde film: " +
-                                          movieDetail.genres[index].name);
-                                      debugPrint("idsi: " +
-                                          movieDetail.genres[index].id
-                                              .toString());
-
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(

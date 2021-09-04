@@ -34,9 +34,6 @@ class _MovieCollectorTabViewState extends State<MovieCollectorTabView> {
     ///Foreground-> yani uygulama içinde gezinirken gelecek bildirimleri dinler.
     FirebaseMessaging.onMessage.listen(
       (message) {
-        debugPrint("NOTIFY BODY: " + message.notification.body);
-        debugPrint("NOTIFY TITLE: " + message.notification.title);
-
         LocalNotificationService.display(message);
       },
     );

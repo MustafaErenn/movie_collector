@@ -55,8 +55,6 @@ abstract class ProfileSettingViewModel extends State<ProfileSettings> {
           );
         });
       } else {
-        // RESIM GUNCELLENMIYORSA
-        print("new user name : " + newUsername.isEmpty.toString());
         FirebaseFirestore.instance
             .collection("Accounts")
             .doc(FirebaseAuth.instance.currentUser.uid)

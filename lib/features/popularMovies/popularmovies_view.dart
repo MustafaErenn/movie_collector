@@ -38,7 +38,6 @@ class PopularMovieView extends PopularMovieViewModel {
                             MovieDetails(id: resultPopularMovies[index].id),
                       ),
                     );
-                    print('${resultPopularMovies[index].id}');
                   },
                   child: Container(
                     //color: Colors.black54,

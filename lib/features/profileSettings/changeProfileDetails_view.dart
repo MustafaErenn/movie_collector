@@ -52,7 +52,6 @@ class ProfileSettingsView extends ProfileSettingViewModel {
                                 ),
                                 ListTile(
                                   onTap: () {
-                                    print('Camera');
                                     openCamera(context);
                                   },
                                   title: Text("Camera"),

@@ -39,7 +39,6 @@ class TopRatedMovieView extends TopRatedMovieViewModel {
                             MovieDetails(id: resultTopRatedMovies[index].id),
                       ),
                     );
-                    print('${resultTopRatedMovies[index].id}');
                   },
                   child: Container(
                     //color: Colors.black54,

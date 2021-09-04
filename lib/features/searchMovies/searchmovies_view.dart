@@ -38,9 +38,7 @@ class SearchMovieView extends SearchMovieViewModel {
                             ),
                             maxLines: 1,
                             style: TextStyle(fontSize: 20),
-                            onChanged: (String currentText) {
-                              print('$currentText');
-                            },
+                            onChanged: (String currentText) {},
                           ),
                         ),
                       ),

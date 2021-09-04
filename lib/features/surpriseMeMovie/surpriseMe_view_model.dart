@@ -59,14 +59,11 @@ abstract class SurpriseMeViewModel extends State<SurpriseMe> {
       _similarMovies += await context
           .read<SimilarMovieService>()
           .getMovies(2, randomId, context.read<CurrentLanguage>().turkishLang);
-      debugPrint(
-          'favorilerden secilen rastgele film id: ' + randomId.toString());
 
       int newId;
       while (true) {
         int randomIndex = rng.nextInt(_similarMovies.length);
         String similarMovieId = _similarMovies[randomIndex].id.toString();
-        debugPrint('benzeri seçilen film id: ' + similarMovieId);
         if (!favoritesMovieIdList.contains(similarMovieId)) {
           newId = int.parse(similarMovieId);
           break;
@@ -80,7 +77,6 @@ abstract class SurpriseMeViewModel extends State<SurpriseMe> {
       });
     } else {
       setState(() {
-        debugPrint('hic favori yok ');
         fsBool = false;
       });
     }

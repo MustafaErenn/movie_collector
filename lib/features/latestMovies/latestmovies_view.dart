@@ -39,7 +39,6 @@ class LatestMovieView extends LatestMovieViewModel {
                             MovieDetails(id: resultLatestMovies[index].id),
                       ),
                     );
-                    print('${resultLatestMovies[index].id}');
                   },
                   child: Container(
                     //color: Colors.black54,

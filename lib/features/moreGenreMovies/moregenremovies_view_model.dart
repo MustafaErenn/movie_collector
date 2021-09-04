@@ -18,7 +18,6 @@ abstract class MoreGenreMovieViewModel extends State<MoreGenreMovies> {
     // TODO: implement initState
     super.initState();
     resultPage = 1;
-    debugPrint("initstate" + widget.genreIdList.toString());
     getCurrentGenreMovies(resultPage, widget.genreIdList);
     genreScrollController = ScrollController();
     genreScrollController.addListener(() {
@@ -38,7 +37,6 @@ abstract class MoreGenreMovieViewModel extends State<MoreGenreMovies> {
   Future<void> getCurrentGenreMovies(int page, List<int> genreIdList) async {
     currentGenreMovies = await context.read<MoreGenreService>().getMovies(
         page, genreIdList, context.read<CurrentLanguage>().turkishLang);
-    debugPrint("CURRENT GENRE " + currentGenreMovies.toString());
     if (currentGenreMovies.length != 0) {
       if (listEquals(_oldResult, currentGenreMovies) == false) {
         resultGenreMovies += currentGenreMovies;

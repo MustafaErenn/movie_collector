@@ -41,7 +41,6 @@ class WatchedMovieView extends WatchedMovieViewModel {
                 ),
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
-                    debugPrint(snapshot.data.docs[index]['movieId'].toString());
                     Navigator.push(
                       context,
                       MaterialPageRoute(
