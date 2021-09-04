@@ -14,7 +14,7 @@ class FavoritesMovieView extends FavoriteMovieViewModel {
         centerTitle: true,
         title: Text(
           context.watch<CurrentLanguage>().turkishLang == true
-              ? 'Favoriler'
+              ? 'Favoriler '
               : 'Favorites',
         ),
       ),
