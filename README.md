@@ -6,14 +6,17 @@ Bu proje  Staj-I esnasında Flutter'da kendimi geliştirmek için yaptığım uy
 <img src="images/14.jpeg" width="250" height="500"> <img src="images/13.jpeg" width="250" height="500">
 Giriş ve Kayıt Ekranları
 
+
+## Uygulama açılış ekranı
 <img src="images/12.jpeg" width="250" height="500"> 
 
-Uygulama açılış ekranı
 
 
+
+## Ekranda görüntülenen filmlerin üstüne tıklandığında gidilen film detay sayfası. Sayfanın appbarında yer alan butonları kullanarak watchliste , favoritese veya watched ekleme yapabilir veya bu filmi begendiyseniz bu filmin benzerlerinin listelendiği sayfaya götürecek butonu kullanabilirsiniz. 
 <img src="images/6.jpeg" width="250" height="500"> 
 
-Ekranda görüntülenen filmlerin üstüne tıklandığında gidilen film detay sayfası. Sayfanın appbarında yer alan butonları kullanarak watchliste , favoritese veya watched ekleme yapabilir veya bu filmi begendiyseniz bu filmin benzerlerinin listelendiği sayfaya götürecek butonu kullanabilirsiniz. 
+
 
 
 
