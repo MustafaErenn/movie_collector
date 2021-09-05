@@ -29,8 +29,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-
-  //
   runApp(MultiProvider(
     providers: [
       Provider<LatestService>(create: (context) => LatestService()),
