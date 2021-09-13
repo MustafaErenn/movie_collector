@@ -15,10 +15,10 @@ class SearchMovieService {
       String url;
       if (turkLang) {
         url =
-            'https://api.themoviedb.org/3/search/movie?api_key=3af7f4422f5644de486084c74816093a&page=$page&query=$name&language=tr';
+            'https://api.themoviedb.org/3/search/movie?api_key=XXX&page=$page&query=$name&language=tr';
       } else {
         url =
-            'https://api.themoviedb.org/3/search/movie?api_key=3af7f4422f5644de486084c74816093a&page=$page&query=$name';
+            'https://api.themoviedb.org/3/search/movie?api_key=XXX&page=$page&query=$name';
       }
 
       final response = await dio.get(url);
