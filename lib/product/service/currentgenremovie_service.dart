@@ -14,10 +14,10 @@ class CurrentGenreService {
     String url;
     if (turkLang) {
       url =
-          'https://api.themoviedb.org/3/discover/movie?api_key=3af7f4422f5644de486084c74816093a&with_genres=$genre&page=$page&language=tr';
+          'https://api.themoviedb.org/3/discover/movie?api_key=XXX&with_genres=$genre&page=$page&language=tr';
     } else {
       url =
-          'https://api.themoviedb.org/3/discover/movie?api_key=3af7f4422f5644de486084c74816093a&with_genres=$genre&page=$page';
+          'https://api.themoviedb.org/3/discover/movie?api_key=XXX&with_genres=$genre&page=$page';
     }
 
     final response = await dio.get(url);
