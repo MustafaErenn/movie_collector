@@ -15,10 +15,10 @@ class SearchByGenreService {
     String url;
     if (turkLang) {
       url =
-          'https://api.themoviedb.org/3/genre/movie/list?api_key=3af7f4422f5644de486084c74816093a&language=tr';
+          'https://api.themoviedb.org/3/genre/movie/list?api_key=XXX&language=tr';
     } else {
       url =
-          'https://api.themoviedb.org/3/genre/movie/list?api_key=3af7f4422f5644de486084c74816093a';
+          'https://api.themoviedb.org/3/genre/movie/list?api_key=XXX';
     }
 
     final response = await dio.get(url);
