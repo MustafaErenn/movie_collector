@@ -76,4 +76,5 @@ Drawer'da yer alan dili değiştirmeyi kullanarak Türkçe diline geçebilirsini
 
 # İletişim
 [E-posta](mustafaeren790@gmail.com)
+
 [Linkedin](https://www.linkedin.com/in/mustafa-eren-9214661b3/)
