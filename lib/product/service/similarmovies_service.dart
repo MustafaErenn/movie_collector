@@ -8,10 +8,10 @@ class SimilarMovieService {
     String url;
     if (turkLang) {
       url =
-          'https://api.themoviedb.org/3/movie/$id/recommendations?api_key=3af7f4422f5644de486084c74816093a&page=$page&language=tr';
+          'https://api.themoviedb.org/3/movie/$id/recommendations?api_key=XXX&page=$page&language=tr';
     } else {
       url =
-          'https://api.themoviedb.org/3/movie/$id/recommendations?api_key=3af7f4422f5644de486084c74816093a&page=$page';
+          'https://api.themoviedb.org/3/movie/$id/recommendations?api_key=XXX&page=$page';
     }
 
     final response = await dio.get(url);
